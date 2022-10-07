@@ -17,7 +17,7 @@ for s in a:
             stack.append(s)
         elif s == ')':
             while stack and stack[-1] != '(':
-                ans += stack.pop()
+                ans += stack.pop()    
             stack.pop()
 while stack :
     ans+=stack.pop()
