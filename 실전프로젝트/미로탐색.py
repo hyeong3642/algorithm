@@ -9,7 +9,6 @@ for i in range(t):
     d=[]
     for i in range(n):
         d.append(list(map(int,input())))
-
     def bfs(x, y):
         queue = deque()
         queue.append((x,y))
