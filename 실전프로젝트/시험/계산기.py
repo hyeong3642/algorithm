@@ -21,8 +21,6 @@ for i in range(t):
             e.append(a[i])
     while len(e) != 0:
         d.append(e.pop())
-    #print(d)
-    #print(e)
     for i in range(len(d)):
         if d[i].isdigit():
             e.append(int(d[i]))
