@@ -28,11 +28,11 @@ for i in range(t):
             if visited[x-2][y] == 0 or visited[x-2][y] > visited[x][y]+1:
                 visited[x-2][y] = visited[x][y] +1
                 check_list.append((x-2,y))
-        if (x-1 >=0 and y-1 >=0) and graph[x][y-1] == '.' and graph[x-1][y-1] == 'H':
+        if (x-1 >=0 and y-1 >=0) and graph[x][y-1] == '.' and graph[x-1][y] == '.' and graph[x-1][y-1] == 'H':
             if visited[x-1][y-1] == 0 or visited[x-1][y-1] > visited[x][y]+1:
                 visited[x-1][y-1] = visited[x][y] +1
                 check_list.append((x-1,y-1))
-        if (x-1 >=0 and y+1 < n) and graph[x][y+1] == '.' and graph[x-1][y+1] == 'H':
+        if (x-1 >=0 and y+1 < n) and graph[x][y+1] == '.' and graph[x-1][y] == '.' and graph[x-1][y+1] == 'H':
             if visited[x-1][y+1] == 0 or visited[x-1][y+1] > visited[x][y]+1:
                 visited[x-1][y+1] = visited[x][y] +1
                 check_list.append((x-1,y+1))
