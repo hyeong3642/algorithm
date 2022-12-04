@@ -1,39 +1,36 @@
+from collections import deque
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
 t = int(input())
 for _ in range(t):
     n, m = map(int, input().split())
     graph = []
+    queue = deque()
     for i in range(n):
         graph.append(list(map(int, input().split())))
+    for i in range(n):
+        for j in range(m):
+            if graph[i][j]== 1:
+                queue.append((i, j))
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx <n and 0<= ny < m and graph[nx][ny] ==0:
+                graph[nx][ny] = graph[x][y] +1
+                queue.append((nx,ny))
+    ans = 0
     check = 0
-    time = 0
-    while check == 0:
-        visited = [[0] * m for _ in range(n)]
-        tmp = 0
-        for i in range(n):
-            for j in range(m):
-                if graph[i][j] == 0 :
-                    tmp = -1
-        if tmp == 0 :
-            print(time)
+    for i in range(n):
+        if 0 in graph[i]:
+            check = 1
             break
-        else : 
-            time +=1
-            if time > m+1:
-                print("-1")
-                break
-        for i in range(n):
-            for j in range(m):
-                if graph[i][j] == 1 and visited[i][j] == 0:
-                    if i-1 >=0 and graph[i-1][j] == 0:
-                        graph[i-1][j] = 1
-                        visited[i-1][j] = 1
-                    if i+1 <n and graph[i+1][j] == 0 :
-                        graph[i+1][j] = 1
-                        visited[i+1][j] = 1
-                    if j-1 >=0 and graph[i][j-1] == 0 :
-                        graph[i][j-1] = 1
-                        visited[i][j-1] = 1
-                    if j+1< m and graph[i][j+1] == 0:
-                        graph[i][j+1] = 1
-                        visited[i][j+1] = 1
+        ans = max(ans, max(graph[i])) 
+    if check == 1:
+        print("-1")
+    else:
+        print(ans-1)
         
