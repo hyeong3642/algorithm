@@ -1,35 +1,31 @@
 t = int(input())
 
 for i in range(t):
-    n = int(input())
-    m = int(input())
+    n,m = map(int, input().split())
     rec = list(map(int, input().split()))
     dic = {}
     ans = []
-    before = 2
     idx = 0
-    for i in range(m):
-        dic[rec[i]] = 0
-    for i in range(m):
-        if len(ans) < n :
-            if rec[i] not in ans:
-                ans.append(rec[i])
-            dic[rec[i]] +=1
-        else:
-            if rec[i] in ans :
-                dic[rec[i]] +=1
-            else:
-                dic[rec[i]] +=1
-                if dic[rec[i]] > before and i!=idx:
-                    dic[ans[idx]] =0
-                    del ans[idx]
-                    ans.append(rec[i])
-        for i in range(len(ans)):
-            print(before, dic[ans[i]])
-            if before > dic[ans[i]]  :
-                before = dic[ans[i]]
-                idx = i
-        print(ans)
+    for i in range(101):
+        dic[i] = 0
+    for i in rec:
+        if dic[i] != 0 :
+            dic[i] +=1
+        elif idx < n :
+            dic[i] =1
+            ans.append(i)
+            idx +=1
+        else :
+            old = -1
+            recommend = 10000
+            for j in ans:
+                if dic[j] < recommend:
+                    old = j
+                    recommend = dic[j]
+            dic[old] = 0
+            dic[i] = 1
+            ans.remove(old)
+            ans.append(i)
     ans.sort()
     for i in range(len(ans)):
         print(ans[i], end = ' ')
